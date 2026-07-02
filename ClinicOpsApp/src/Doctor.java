@@ -15,6 +15,22 @@ public class Doctor {
 
     private ArrayList<String> bookedSlots;
 
+
+    public boolean isShiftCompatible(String slot) {
+
+        // Morning slots
+        if (slot.startsWith("09") ||
+            slot.startsWith("10") ||
+            slot.startsWith("11") ||
+            slot.startsWith("12")) {
+
+            return shift == Shift.MORNING || shift == Shift.BOTH;
+        }
+
+        // Evening slots
+        return shift == Shift.EVENING || shift == Shift.BOTH;
+    }
+
     // Constructor
     public Doctor(String id, String name, Specialization specialization,
                   int experience, Shift shift) {

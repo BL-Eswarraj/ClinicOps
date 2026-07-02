@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -147,18 +148,13 @@ public class FrontDeskMenu {
         }
 
         // Step 5: Find doctors available in this slot
-        ArrayList<Doctor> availableDoctors = new ArrayList<>();
+        //List<Doctor> availableDoctors = new List<>();
 
-        for (Doctor doctor : doctorList) {
-
-            if (doctor.getSpecialization() == specialization
-                    && doctor.isSlotAvailable(slot)) {
-
-                availableDoctors.add(doctor);
-
-            }
-
-        }
+        List<Doctor> availableDoctors = doctorList.stream()
+        .filter(doctor -> doctor.getSpecialization() == specialization)
+        .filter(doctor -> doctor.isShiftCompatible(slot))
+        .filter(doctor -> doctor.isSlotAvailable(slot))
+        .toList();
 
         // Step 6: Check availability
         if (availableDoctors.isEmpty()) {
