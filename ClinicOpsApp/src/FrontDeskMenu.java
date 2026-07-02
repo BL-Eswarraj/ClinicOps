@@ -51,6 +51,18 @@ public class FrontDeskMenu {
 
     System.out.println("\n===== PATIENT REGISTRATION =====");
 
+    String mobileNumber = ScannerHelper.readMobileNumber(scanner, "Enter Mobile Number: ");
+
+    Patient existingPatient  = findPatientByMobile(mobileNumber);
+    if (existingPatient != null) {
+
+        System.out.println();
+        System.out.println("Patient already registered.");
+        System.out.println("Welcome back!");
+        System.out.println(existingPatient);
+
+        return;
+    }
     // Generate Patient ID
     String patientId = String.format("P%04d", patientIdCounter++);
 
@@ -58,7 +70,7 @@ public class FrontDeskMenu {
     String name = ScannerHelper.readString(scanner, "Enter Patient Name: ");
     String gender = ScannerHelper.readString(scanner, "Enter Gender: ");
     int age = ScannerHelper.readIntwithPrompt(scanner, "Enter Age: ");
-    String mobileNumber = ScannerHelper.readMobileNumber(scanner, "Enter Mobile Number: ");
+    
 
     // Create Patient object
     Patient patient = new Patient(
@@ -87,6 +99,17 @@ public class FrontDeskMenu {
     for (Patient patient : patients) {
         System.out.println(patient);
     }
-}
+   }
+   private static Patient findPatientByMobile(String mobileNumber) {
+
+    for (Patient patient : patients) {
+
+        if (patient.getMobileNumber().equals(mobileNumber)) {
+            return patient;
+        }
+    }
+
+    return null;
+   }
 
 }

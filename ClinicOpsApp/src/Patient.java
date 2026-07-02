@@ -31,5 +31,8 @@ public class Patient {
                "\nMobile Number  : " + mobileNumber +
                "\n------------------------------------";
     }
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
 
 }
