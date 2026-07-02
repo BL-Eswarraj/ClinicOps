@@ -7,6 +7,7 @@ public class FrontDeskMenu {
     private static final int BOOK_APPOINTMENT = 2;
     private static final int VIEW_PATIENTS = 3;
     private static final int LOGOUT = 4;
+    
 
     //Add Patient in Array
     private static ArrayList<Patient> patients = new ArrayList<>();
@@ -132,6 +133,7 @@ public class FrontDeskMenu {
             System.out.println("Please register the patient first.");
             return;
         }
+        Specialization specialization = ScannerHelper.readEnumchoice(scanner, "",Specialization.values());
 
         // Step 3: Select Appointment Slot
         String slot = ScannerHelper.readAppointmentSlot(scanner);
@@ -149,9 +151,13 @@ public class FrontDeskMenu {
 
         for (Doctor doctor : doctorList) {
 
-            if (doctor.isSlotAvailable(slot)) {
+            if (doctor.getSpecialization() == specialization
+                    && doctor.isSlotAvailable(slot)) {
+
                 availableDoctors.add(doctor);
+
             }
+
         }
 
         // Step 6: Check availability
