@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.regex.Pattern;
+
 
 public class ScannerHelper {
 
@@ -63,4 +65,23 @@ public static <T extends Enum<T>>T readEnumchoice(Scanner scanner, String prompt
     }
 
  }
+ public static String readMobileNumber(Scanner scanner, String prompt) {
+
+    // Indian mobile number regex
+    String regex = "^[6-9]\\d{9}$";
+
+    while (true) {
+
+        System.out.print(prompt);
+
+        String mobile = scanner.nextLine().trim();
+
+        if (Pattern.matches(regex, mobile)) {
+            return mobile;
+        }
+
+        System.out.println("Invalid Mobile Number. Please try again.");
+    }
+ }
+ 
 }
