@@ -9,6 +9,10 @@ public class Doctor {
     private int experience;
     private Shift shift;
 
+    public Specialization getSpecialization() {
+        return specialization;
+    }
+
     private ArrayList<String> bookedSlots;
 
     // Constructor
