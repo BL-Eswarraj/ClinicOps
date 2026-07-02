@@ -46,4 +46,21 @@ public static int readIntwithPrompt(Scanner scanner, String prompt) {
         }
     }
 }
+public static <T extends Enum<T>>T readEnumchoice(Scanner scanner, String prompt,  T[] values){
+
+    while (true){
+        for (int i = 0; i < values.length; i++){
+            System.out.println((i+1)+"."+ values[i]);
+
+        }
+        int choice = readIntwithPrompt(scanner, "Select choice Number: ");
+
+        if (choice > 0 && choice <= values.length){
+            return values[choice - 1];
+        } 
+
+        System.out.println(">>Error:  Invalid Selection Try Again");
+    }
+
+ }
 }
