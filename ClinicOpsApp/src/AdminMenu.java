@@ -27,7 +27,7 @@ public class AdminMenu {
                 registerDoctors(scanner);
                 break;
             case BULK_DATA_ENTRY:
-                System.out.println("Bulk Data Entry.....");
+                bulkDataEntry(scanner);
                 break;
             case VIEW_AUDIT_LOGS:
                 System.out.println("View Logs....");
@@ -95,6 +95,25 @@ public class AdminMenu {
         for(Doctor doctor: doctors){
             System.out.println(doctor);
         }
+    }
+
+    private static void bulkDataEntry(Scanner scanner) {
+
+    String filePath = ScannerHelper.readString(
+            scanner,
+            "Enter CSV file path: ");
+
+    ArrayList<Doctor> importedDoctors =
+            FileHandler.readDoctorsFromCSV(filePath, idCounter);
+
+    doctors.addAll(importedDoctors);
+
+    idCounter += importedDoctors.size();
+
+    System.out.println();
+
+    System.out.println(importedDoctors.size()
+            + " Doctors imported successfully.");
     }
 
 }
