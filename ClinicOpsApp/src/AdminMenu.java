@@ -48,7 +48,7 @@ public class AdminMenu {
     
     }
     private static void displayAdminOptions() {
-        // TODO Auto-generated method stub
+        
         System.out.println("------ CLINIC ADMIN MENU ------");
         System.out.println();
         System.out.println("1. Doctor Data Entry");
@@ -64,12 +64,12 @@ public class AdminMenu {
         //Store docotors in Array
         for (int i =0; i<3; i++){
 
-            System.out.println("\n====REGISTER DOCTOR"+ i +"====");
+            System.out.println("\n====REGISTER DOCTOR "+ i +"====");
 
             String name = ScannerHelper.readString(scanner, "Enter Doctor Name: ");
-            String specialization = ScannerHelper.readString(scanner, "Enter Doctor Specialization: ");
+            Specialization specialization = ScannerHelper.readEnumchoice(scanner, "Enter Speciliztion",Specialization.values());
             int experience = ScannerHelper.readIntwithPrompt(scanner, "Enter Doctor Experience: ");
-            String shift = ScannerHelper.readString(scanner, "Enter Shift: ");
+            Shift shift = ScannerHelper.readEnumchoice(scanner, "Enter Shift: ", Shift.values());
 
             String id = String.format("D%04d", idCounter);
 
