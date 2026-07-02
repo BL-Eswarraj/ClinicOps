@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class AdminMenu {
 
@@ -7,6 +8,12 @@ public class AdminMenu {
     private static final int VIEW_AUDIT_LOGS = 3;
     private static final int DISPLAY_DOCTORS = 4;
     private static final int LOGOUT = 5;
+
+    //Storing Doctor detials
+    private static ArrayList<Doctor> doctors = new ArrayList<>(); 
+
+    // Used to generate unique Doctor IDs
+    private static int idCounter = 1;
 
     public static void showMenu(Scanner scanner){
         boolean logout = false;
@@ -51,75 +58,44 @@ public class AdminMenu {
         System.out.println("5. Logout");
         System.out.print("Enter your choice: ");
     }
-    //Doctor 1 Details
-    private static String doctor1Name;
-    private static String doctor1Specialization;
-    private static int doctor1Experience;
-    private static String doctor1Slots;
-
-    //Doctor 2 Details
-    private static String doctor2Name;
-    private static String doctor2Specialization;
-    private static int doctor2Experience;
-    private static String doctor2Slots;
-
-    //Doctor 3 Details
-    private static String doctor3Name;
-    private static String doctor3Specialization;
-    private static int doctor3Experience;
-    private static String doctor3Slots;
 
     private static void registerDoctors(Scanner scanner){
 
-        System.out.println("\n===== Register Doctor 1 =====");
+        //Store docotors in Array
+        for (int i =0; i<3; i++){
 
-        doctor1Name = ScannerHelper.readString(scanner, "Enter Doctor Name: ");
-        doctor1Specialization = ScannerHelper.readString(scanner, "Enter Specialization: ");
-        doctor1Experience = ScannerHelper.readIntwithPrompt(scanner, "Enter Experience: ");
-        doctor1Slots = ScannerHelper.readString(scanner, "Enter Available Slot: ");
+            System.out.println("\n====REGISTER DOCTOR"+ i +"====");
 
-        System.out.println("\n===== Register Doctor 2 =====");
+            String name = ScannerHelper.readString(scanner, "Enter Doctor Name: ");
+            String specialization = ScannerHelper.readString(scanner, "Enter Doctor Specialization: ");
+            int experience = ScannerHelper.readIntwithPrompt(scanner, "Enter Doctor Experience: ");
+            String shift = ScannerHelper.readString(scanner, "Enter Shift: ");
 
-        doctor2Name = ScannerHelper.readString(scanner, "Enter Doctor Name: ");
-        doctor2Specialization = ScannerHelper.readString(scanner, "Enter Specialization: ");
-        doctor2Experience = ScannerHelper.readIntwithPrompt(scanner, "Enter Experience: ");
-        doctor2Slots = ScannerHelper.readString(scanner, "Enter Available Slot: ");
+            String id = String.format("D%04d", idCounter);
 
-        System.out.println("\n===== Register Doctor 3 =====");
+            idCounter++;
 
-        doctor3Name = ScannerHelper.readString(scanner, "Enter Doctor Name: ");
-        doctor3Specialization = ScannerHelper.readString(scanner, "Enter Specialization: ");
-        doctor3Experience = ScannerHelper.readIntwithPrompt(scanner, "Enter Experience: ");
-        doctor3Slots = ScannerHelper.readString(scanner, "Enter Available Slot: ");
-
-        System.out.println("\nAll three doctors have been registered successfully.");
+            //Create Doctor Object
+            Doctor doctor = new Doctor(id, name, specialization, experience,shift);
+            // Adding to array
+            doctors.add(doctor);
+        }
+        System.out.println("\nDoctors registered successfully.");
     }
     //Display Doctors
     private static void displayDoctors() {
+        System.out.println("\n====REGISTERED DOCTORS=====");
+        System.out.println();
 
-    System.out.println("\n------ Registered Doctors ------");
+        if (doctors.isEmpty()){
+            System.out.println("No Doctors Registered yet");
+            return;
+        }
 
-    System.out.println("Doctor 1");
-    System.out.println("Name : " + doctor1Name);
-    System.out.println("Specialization : " + doctor1Specialization);
-    System.out.println("Experience : " + doctor1Experience);
-    System.out.println("Slots : " + doctor1Slots);
+        for(Doctor doctor: doctors){
+            System.out.println(doctor);
+        }
+    }
 
-    System.out.println();
-
-    System.out.println("Doctor 2");
-    System.out.println("Name : " + doctor2Name);
-    System.out.println("Specialization : " + doctor2Specialization);
-    System.out.println("Experience : " + doctor2Experience);
-    System.out.println("Slots : " + doctor2Slots);
-
-    System.out.println();
-
-    System.out.println("Doctor 3");
-    System.out.println("Name : " + doctor3Name);
-    System.out.println("Specialization : " + doctor3Specialization);
-    System.out.println("Experience : " + doctor3Experience);
-    System.out.println("Slots : " + doctor3Slots);
-}
 }
 
