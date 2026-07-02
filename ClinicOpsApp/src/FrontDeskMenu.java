@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class FrontDeskMenu {
@@ -11,6 +12,10 @@ public class FrontDeskMenu {
     private static ArrayList<Patient> patients = new ArrayList<>();
 
     private static int patientIdCounter = 1;
+
+    private static ArrayList<Appointment> appointmentList = new ArrayList<>();
+
+    private static int appointmentCounter = 1;
 
     public static void showMenu(Scanner scanner){
 
@@ -32,7 +37,7 @@ public class FrontDeskMenu {
                     break;
 
                 case BOOK_APPOINTMENT:
-                    System.out.println("Initiating Book Appointment Process...");
+                    bookAppointment(scanner);
                     break;
                 case VIEW_PATIENTS:
                     viewPatients();
@@ -111,5 +116,68 @@ public class FrontDeskMenu {
 
     return null;
    }
+
+   private static void bookAppointment(Scanner scanner) {
+
+        System.out.println("\n===== BOOK APPOINTMENT =====");
+
+        // Step 1: Read Patient Mobile Number
+        String mobileNumber = ScannerHelper.readMobileNumber(scanner, "Enter Mobile Number: ");
+
+        // Step 2: Check whether patient is registered
+        Patient patient = findPatientByMobile(mobileNumber);
+
+        if (patient == null) {
+            System.out.println("Patient is not registered.");
+            System.out.println("Please register the patient first.");
+            return;
+        }
+
+        // Step 3: Select Appointment Slot
+        String slot = ScannerHelper.readAppointmentSlot(scanner);
+
+        // Step 4: Get Doctors List
+        ArrayList<Doctor> doctorList = AdminMenu.getDoctors();
+
+        if (doctorList.isEmpty()) {
+            System.out.println("No doctors are available.");
+            return;
+        }
+
+        // Step 5: Find doctors available in this slot
+        ArrayList<Doctor> availableDoctors = new ArrayList<>();
+
+        for (Doctor doctor : doctorList) {
+
+            if (doctor.isSlotAvailable(slot)) {
+                availableDoctors.add(doctor);
+            }
+        }
+
+        // Step 6: Check availability
+        if (availableDoctors.isEmpty()) {
+            System.out.println("Sorry! No doctor is available for this slot.");
+            return;
+        }
+
+        // Step 7: Randomly assign a doctor
+        Random random = new Random();
+
+        Doctor assignedDoctor =
+                availableDoctors.get(random.nextInt(availableDoctors.size()));
+
+        // Step 8: Block the slot
+        assignedDoctor.bookSlot(slot);
+
+        // Step 9: Create Appointment
+        Appointment appointment =
+                new Appointment(patient, assignedDoctor, slot);
+
+        appointmentList.add(appointment);
+
+        // Step 10: Confirmation
+        System.out.println("\n===== APPOINTMENT BOOKED SUCCESSFULLY =====");
+        System.out.println(appointment);
+    }
 
 }

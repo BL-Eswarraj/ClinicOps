@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Doctor {
     
     //Declaring variables
@@ -7,7 +9,9 @@ public class Doctor {
     private int experience;
     private Shift shift;
 
-        // Constructor
+    private ArrayList<String> bookedSlots;
+
+    // Constructor
     public Doctor(String id, String name, Specialization specialization,
                   int experience, Shift shift) {
 
@@ -16,6 +20,8 @@ public class Doctor {
         this.specialization = specialization;
         this.experience = experience;
         this.shift = shift;
+
+        bookedSlots = new ArrayList<>();
     }
 
         // toString() Method
@@ -28,6 +34,28 @@ public class Doctor {
                "\nExperience     : " + experience + " Years" +
                "\nShift          : " + shift +
                "\n------------------------------------";
+    }
+    public boolean isSlotAvailable(String slot) {
+
+        return !bookedSlots.contains(slot);
+
+    }
+    public void bookSlot(String slot) {
+
+        bookedSlots.add(slot);
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Shift getShift() {
+        return shift;
+    }
+
+    public String getId() {
+        return id;
     }
 
 }
