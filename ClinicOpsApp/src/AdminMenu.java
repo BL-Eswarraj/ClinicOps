@@ -64,7 +64,7 @@ public class AdminMenu {
         //Store docotors in Array
         for (int i =0; i<3; i++){
 
-            System.out.println("\n====REGISTER DOCTOR "+ i +"====");
+            System.out.println("\n====REGISTER DOCTOR "+ (i+1) +"====");
 
             String name = ScannerHelper.readString(scanner, "Enter Doctor Name: ");
             Specialization specialization = ScannerHelper.readEnumchoice(scanner, "Enter Speciliztion",Specialization.values());
@@ -114,6 +114,10 @@ public class AdminMenu {
 
     System.out.println(importedDoctors.size()
             + " Doctors imported successfully.");
+    }
+
+    public static ArrayList<Doctor> getDoctors() {
+        return doctors;
     }
 
 }

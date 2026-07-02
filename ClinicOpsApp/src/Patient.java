@@ -35,4 +35,11 @@ public class Patient {
         return mobileNumber;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getId() {
+        return id;
+    }
 }
