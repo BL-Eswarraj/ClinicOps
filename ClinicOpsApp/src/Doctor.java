@@ -64,6 +64,8 @@ public class Doctor {
 
         bookedSlots.add(slot);
 
+        AuditLogger.log("Slot Added: "+ slot, "INFO");
+
     }
 
     public String getName() {
