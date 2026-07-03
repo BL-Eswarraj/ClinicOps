@@ -73,7 +73,6 @@ public static <T extends Enum<T>>T readEnumchoice(Scanner scanner, String prompt
     while (true) {
 
         System.out.print(prompt);
-
         String mobile = scanner.nextLine().trim();
 
         if (Pattern.matches(regex, mobile)) {

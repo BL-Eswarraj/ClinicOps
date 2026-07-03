@@ -33,6 +33,7 @@ public class FrontDeskMenu {
             System.out.print("Enter Your Choice: ");
 
             int choice = ScannerHelper.readInt(scanner);
+            scanner.nextLine();
             switch(choice){
                 case PATIENT_REGISTRATION:
                     registerPatient(scanner);
@@ -161,6 +162,7 @@ public class FrontDeskMenu {
         // Step 6: Check availability
         if (availableDoctors.isEmpty()) {
             System.out.println("Sorry! No doctor is available for this slot.");
+            AuditLogger.log("No Doctor available in this slot=> "+ slot, "WARNING");
             return;
         }
 
@@ -180,7 +182,7 @@ public class FrontDeskMenu {
         appointmentList.add(appointment);
 
         //Log added
-        AuditLogger.log("Appointment Added: "+ appointment, "INFO");
+        AuditLogger.log("Appointment Added: "+ patient+"\n Assigned Doctor=> "+ assignedDoctor.getName() +"\nSlot => " + slot , "INFO");
 
         // Step 10: Confirmation
         System.out.println("\n===== APPOINTMENT BOOKED SUCCESSFULLY =====");
