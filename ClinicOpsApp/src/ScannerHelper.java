@@ -69,14 +69,24 @@ public static <T extends Enum<T>>T readEnumchoice(Scanner scanner, String prompt
 
     // Indian mobile number regex
     String regex = "^[6-9]\\d{9}$";
+    int attempts=0;
 
     while (true) {
 
         System.out.print(prompt);
         String mobile = scanner.nextLine().trim();
 
+        attempts++;
         if (Pattern.matches(regex, mobile)) {
             return mobile;
+        }
+        AuditLogger.log("Invalid Mobile Number : " + mobile,"WARNING");
+
+        if (attempts >= 3) {
+
+            AuditLogger.log(
+                    "SECURITY ALERT : Multiple Invalid Mobile Attempts",
+                    "ERROR");
         }
 
         System.out.println("Invalid Mobile Number. Please try again.");
