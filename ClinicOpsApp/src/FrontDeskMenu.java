@@ -90,6 +90,8 @@ public class FrontDeskMenu {
     // Store in ArrayList
     patients.add(patient);
 
+    AuditLogger.log("Patient Registered"+ patient, "INFO");
+
     System.out.println("\nPatient Registered Successfully.");
     System.out.println("Generated Patient ID : " + patientId);
    }
@@ -148,7 +150,7 @@ public class FrontDeskMenu {
         }
 
         // Step 5: Find doctors available in this slot
-        //List<Doctor> availableDoctors = new List<>();
+        
 
         List<Doctor> availableDoctors = doctorList.stream()
         .filter(doctor -> doctor.getSpecialization() == specialization)
@@ -176,6 +178,9 @@ public class FrontDeskMenu {
                 new Appointment(patient, assignedDoctor, slot);
 
         appointmentList.add(appointment);
+
+        //Log added
+        AuditLogger.log("Appointment Added: "+ appointment, "INFO");
 
         // Step 10: Confirmation
         System.out.println("\n===== APPOINTMENT BOOKED SUCCESSFULLY =====");

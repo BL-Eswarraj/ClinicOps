@@ -30,7 +30,7 @@ public class AdminMenu {
                 bulkDataEntry(scanner);
                 break;
             case VIEW_AUDIT_LOGS:
-                System.out.println("View Logs....");
+                AuditLogger.displayLogs();
                 break;
             case DISPLAY_DOCTORS:
                 displayDoctors();
@@ -79,6 +79,8 @@ public class AdminMenu {
             Doctor doctor = new Doctor(id, name, specialization, experience,shift);
             // Adding to array
             doctors.add(doctor);
+
+            AuditLogger.log("Doctor Registered:"+ id+" - "+ name,"INFO");
         }
         System.out.println("\nDoctors registered successfully.");
     }
