@@ -1,6 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class AdminMenu {
 
     private static final int DOC_ENTRY = 1;
@@ -9,6 +12,7 @@ public class AdminMenu {
     private static final int DISPLAY_DOCTORS = 4;
     private static final int LOGOUT = 5;
 
+    private static final Logger logger = LogManager.getLogger(AdminMenu.class);
     //Storing Doctor detials
     private static ArrayList<Doctor> doctors = new ArrayList<>(); 
 
@@ -80,7 +84,8 @@ public class AdminMenu {
             // Adding to array
             doctors.add(doctor);
 
-            AuditLogger.log("Doctor Registered:"+ id+" - "+ name,"INFO");
+            //AuditLogger.log("Doctor Registered:"+ id+" - "+ name,"INFO");
+            logger.info("Doctor Registered: {} - {}", id, name);
         }
         System.out.println("\nDoctors registered successfully.");
     }

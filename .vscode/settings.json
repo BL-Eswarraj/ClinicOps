@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "ClinicOpsApp/lib/log4j-api-2.20.0.jar",
+        "ClinicOpsApp/lib/log4j-core-2.20.0.jar"
+    ]
+}
