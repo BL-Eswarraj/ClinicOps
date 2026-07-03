@@ -65,6 +65,7 @@ public class FileHandler {
 
         } catch (IOException e) {
 
+            AuditLogger.log("CSV Upload Failed : " + e.getMessage(),"ERROR");
             System.out.println("Unable to read file: " + e.getMessage());
 
         }
